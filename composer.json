@@ -1,23 +1,21 @@
 {
-	"name": "MamotoNet/sdk-php",
-	"type": "library",
-	"description": "Mamoto SDK for PHP",
-	"keywords": ["mamoto", "sdk", "api", "rest"],
-	"homepage": "https://github.com/MamotoNet/sdk-php",
-	"authors": [
-        {
-            "name": "André Marthaler",
-            "email": "am@mamoto.net",
-            "homepage": "https://www.mamoto.net"
-        }
-    ],
-    "require": {
-		"php": ">=5.4.0",
-		"ext-curl": "*"
-    },
-	"autoload": {
-		"psr-0": {
-			"Mamoto" : "src"
-		}
-	}
+  "name" : "mamoto-net/sdk-php",
+  "description" : "Mamoto SDK for PHP",
+  "require" : {
+    "php" : ">=5.4.0",
+    "ext-curl" : "*"
+  },
+  "authors" : [ {
+    "name" : "André Marthaler",
+    "email" : "am@mamoto.net",
+    "homepage" : "https://www.mamoto.net"
+  } ],
+  "keywords" : [ "mamoto", "sdk", "api", "rest" ],
+  "autoload" : {
+    "psr-0" : {
+      "Mamoto" : "src"
+    }
+  },
+  "type" : "library",
+  "homepage" : "https://github.com/mamoto-net/sdk-php"
 }
