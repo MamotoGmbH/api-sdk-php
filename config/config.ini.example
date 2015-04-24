@@ -1,0 +1,3 @@
+base_url = "https://api.mamoto.net/v2"
+login = "YOUR-CLIENT-NAME"
+password = "YOUR-PASSWORD"
