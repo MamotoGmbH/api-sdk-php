@@ -24,7 +24,7 @@ class ClientsReports extends AbstractApi
     public function get()
     {
         // build url
-        $url = self::BASE_URL . $this->url;
+        $url = $this->base_url . $this->url;
         // get data from server
         $data = $this->getDataFromUrl($url);
         // parse result set and get data as array
