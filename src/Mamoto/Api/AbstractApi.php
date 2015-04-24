@@ -34,7 +34,11 @@ abstract class AbstractApi
     {
         // if config is not set, try to read config file
         if ($config == null) {
-            $config = parse_ini_file(__DIR__ . "/../../../config/config.ini");
+            $_config_file = realpath(__DIR__ . "/../../../config/config.ini");
+            if (! file_exists($_config_file)) {
+                throw new NullPointerException("Config File doesn't exists. Please check.");
+            }
+            $config = parse_ini_file($_config_file);
         }
         
         $this->config = $config;
