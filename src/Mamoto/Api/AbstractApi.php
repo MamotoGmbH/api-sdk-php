@@ -11,7 +11,7 @@ abstract class AbstractApi
     // set SDK Version
     const VERSION = "0.1";
 
-    protected $config = null;
+    static $config = null;
 
     protected $base_url = null;
 
@@ -32,26 +32,33 @@ abstract class AbstractApi
      */
     public function __construct($config = null)
     {
-        // if config is not set, try to read config file
-        if ($config == null) {
-            $_config_file = realpath(__DIR__ . "/../../../config/config.ini");
-            if (! file_exists($_config_file)) {
-                throw new NullPointerException("Config File doesn't exists. Please check.");
-            }
-            $config = parse_ini_file($_config_file);
+        if ($config != null && is_array($config)) {
+            self::$config = $config;
         }
         
-        $this->config = $config;
-        
-        if (isset($config["base_url"])) {
-            $this->setBaseUrl($config["base_url"]);
+        if (isset(self::$config["base_url"])) {
+            $this->setBaseUrl(self::$config["base_url"]);
         }
-        if (isset($config["login"])) {
-            $this->setLogin($config["login"]);
+        if (isset(self::$config["login"])) {
+            $this->setLogin(self::$config["login"]);
         }
-        if (isset($config["password"])) {
-            $this->setPassword($config["password"]);
+        if (isset(self::$config["password"])) {
+            $this->setPassword(self::$config["password"]);
         }
+    }
+
+    /**
+     * set config file for global access
+     *
+     * @param array $config            
+     * @throws NullPointerException
+     */
+    public static function setConfig($config)
+    {
+        if (! is_array($config)) {
+            throw new NullPointerException("Config is not an array.");
+        }
+        self::$config = $config;
     }
 
     /**
@@ -148,7 +155,7 @@ abstract class AbstractApi
             if (strlen($this->login) <= 0 || strlen($this->password) <= 0) {
                 throw new NullPointerException("Login or Password is not set.");
             }
-            $auth = new Authentication($this->config);
+            $auth = new Authentication();
             if (! $auth->authenticate()) {
                 throw new AuthException("Authentication Problem. Please check Login and Password.");
             }
